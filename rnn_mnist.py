@@ -10,7 +10,7 @@ set_context(gpu(0))
 
 BATCH = 50
 INPUT_DIM = 7
-HIDDEN_DIM = 64
+HIDDEN_DIM = 128
 
 data = joblib.load("data/mnist.dat")
 
@@ -37,14 +37,15 @@ model = RNNNet(batch_size=BATCH, input_size=INPUT_DIM, hidden_size=HIDDEN_DIM)
 solver = Solver(model,
                 train_iter,
                 test_iter,
-                num_epochs=100,
+                num_epochs=50,
                 init_rule='xavier',
                 update_rule='rmsprop',
                 optim_config={
-                        'learning_rate': 0.0002,
+                        'learning_rate': 0.0001,
                 },
                 verbose=True,
                 print_every=10)
 
 solver.init()
 solver.train()
+print solver.train_acc_history
